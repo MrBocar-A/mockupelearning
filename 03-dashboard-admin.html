@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Administrateur - Plateforme E-Learning</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/theme-santebi.css">
+
+    <style>
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .content-area {
+            flex: 1;
+            background: var(--color-light);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .filter-card {
+            background: var(--color-white);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+
+        .stat-card-admin {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--border-color);
+        }
+
+        .stat-card-admin.primary {
+            border-top-color: var(--color-primary);
+        }
+
+        .stat-card-admin.success {
+            border-top-color: var(--color-success);
+        }
+
+        .stat-card-admin.warning {
+            border-top-color: var(--color-warning);
+        }
+
+        .stat-card-admin.info {
+            border-top-color: var(--color-info);
+        }
+
+        .stat-card-admin:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .chart-card {
+            background: var(--color-white);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            height: 100%;
+        }
+
+        .chart-container-large {
+            position: relative;
+            height: 350px;
+        }
+
+        .learner-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--color-success);
+        }
+
+        .status-inactive {
+            background: rgba(158, 158, 158, 0.1);
+            color: var(--color-gray);
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--color-warning);
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .action-btn.view {
+            background: rgba(33, 150, 243, 0.1);
+            color: var(--color-info);
+        }
+
+        .action-btn.edit {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--color-warning);
+        }
+
+        .action-btn.delete {
+            background: rgba(244, 67, 54, 0.1);
+            color: var(--color-danger);
+        }
+
+        .export-btn {
+            border: 2px solid var(--color-light-gray);
+            background: var(--color-white);
+            color: var(--color-dark-gray);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .table-responsive {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-heartbeat me-2"></i>
+                <span>E-Learning Santé BI - Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="03-dashboard-admin.html">
+                            <i class="fas fa-chart-line me-1"></i> Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-users me-1"></i> Apprenants
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-book me-1"></i> Formations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-file-alt me-1"></i> Rapports
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <div class="learner-avatar me-2">
+                                AD
+                            </div>
+                            Administrateur
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="01-login.html"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top: 76px;">
+        <div class="content-area">
+            <!-- Header with Actions -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h2 mb-1">Tableau de Bord Administrateur</h1>
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-calendar me-2"></i>
+                        Dernière mise à jour : Aujourd'hui à 14:30
+                    </p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="export-btn">
+                        <i class="fas fa-file-excel me-2"></i>
+                        Exporter Excel
+                    </button>
+                    <button class="export-btn">
+                        <i class="fas fa-file-pdf me-2"></i>
+                        Exporter PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-card">
+                <h5 class="mb-3">
+                    <i class="fas fa-filter me-2"></i>
+                    Filtres
+                </h5>
+                <div class="filter-group">
+                    <div>
+                        <label class="form-label small">Formation</label>
+                        <select class="form-select">
+                            <option>Toutes les formations</option>
+                            <option>Gestion des Maladies Infectieuses</option>
+                            <option>Soins Maternels et Infantiles</option>
+                            <option>Hygiène et Prévention</option>
+                            <option>Nutrition et Santé</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label small">Module</label>
+                        <select class="form-select">
+                            <option>Tous les modules</option>
+                            <option>Module 1</option>
+                            <option>Module 2</option>
+                            <option>Module 3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label small">Période</label>
+                        <select class="form-select">
+                            <option>Ce mois-ci</option>
+                            <option>Cette semaine</option>
+                            <option>Aujourd'hui</option>
+                            <option>Mois dernier</option>
+                            <option>Année en cours</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label small">Région</label>
+                        <select class="form-select">
+                            <option>Toutes les régions</option>
+                            <option>Bujumbura</option>
+                            <option>Gitega</option>
+                            <option>Ngozi</option>
+                            <option>Bururi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary-custom">
+                            <i class="fas fa-search me-2"></i>
+                            Appliquer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="stat-card-admin primary animate-fade-in-up">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="text-muted small mb-1">Total Apprenants</div>
+                                <div class="h2 mb-0 fw-bold">1,254</div>
+                            </div>
+                            <div class="stat-icon primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up me-1"></i>
+                                +12.5%
+                            </span>
+                            <span class="text-muted ms-2">vs mois dernier</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card-admin success animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="text-muted small mb-1">Taux de Complétion</div>
+                                <div class="h2 mb-0 fw-bold">78%</div>
+                            </div>
+                            <div class="stat-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up me-1"></i>
+                                +5.2%
+                            </span>
+                            <span class="text-muted ms-2">vs mois dernier</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card-admin warning animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="text-muted small mb-1">Formations Actives</div>
+                                <div class="h2 mb-0 fw-bold">45</div>
+                            </div>
+                            <div class="stat-icon accent">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <span class="text-info">
+                                <i class="fas fa-plus me-1"></i>
+                                3 nouvelles
+                            </span>
+                            <span class="text-muted ms-2">ce mois</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card-admin info animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="text-muted small mb-1">Temps Moyen</div>
+                                <div class="h2 mb-0 fw-bold">18h</div>
+                            </div>
+                            <div class="stat-icon secondary">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <span class="text-primary">
+                                <i class="fas fa-arrow-up me-1"></i>
+                                +2h
+                            </span>
+                            <span class="text-muted ms-2">vs mois dernier</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="chart-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-line text-primary me-2"></i>
+                                Évolution des Inscriptions (12 derniers mois)
+                            </h5>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-secondary active">Mois</button>
+                                <button type="button" class="btn btn-outline-secondary">Trimestre</button>
+                                <button type="button" class="btn btn-outline-secondary">Année</button>
+                            </div>
+                        </div>
+                        <div class="chart-container-large">
+                            <canvas id="enrollmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="chart-card">
+                        <h5 class="mb-3">
+                            <i class="fas fa-chart-pie text-success me-2"></i>
+                            Répartition par Statut
+                        </h5>
+                        <div class="chart-container-large">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance by Formation -->
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="chart-card">
+                        <h5 class="mb-3">
+                            <i class="fas fa-chart-bar text-info me-2"></i>
+                            Performance par Formation
+                        </h5>
+                        <div class="chart-container-large">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learners Table -->
+            <div class="card-custom">
+                <div class="card-header-custom d-flex justify-content-between align-items-center">
+                    <span>
+                        <i class="fas fa-users me-2"></i>
+                        Apprenants - Vue Détaillée
+                    </span>
+                    <div class="input-group" style="max-width: 300px;">
+                        <input type="text" class="form-control form-control-sm" placeholder="Rechercher un apprenant...">
+                        <button class="btn btn-light btn-sm">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-custom mb-0">
+                        <thead>
+                            <tr>
+                                <th>Apprenant</th>
+                                <th>Formation</th>
+                                <th>Progression</th>
+                                <th>Dernière Activité</th>
+                                <th>Statut</th>
+                                <th>Score Moyen</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="learner-avatar">JD</div>
+                                        <div>
+                                            <div class="fw-semibold">Jean Dupont</div>
+                                            <div class="small text-muted">jean.dupont@minisante.gov.bi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Gestion des Maladies Infectieuses</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress-custom flex-grow-1" style="width: 100px;">
+                                            <div class="progress-bar-custom" style="width: 85%"></div>
+                                        </div>
+                                        <span class="small fw-semibold">85%</span>
+                                    </div>
+                                </td>
+                                <td>Il y a 2 heures</td>
+                                <td>
+                                    <span class="status-badge status-active">Actif</span>
+                                </td>
+                                <td>
+                                    <span class="badge-custom-success">18/20</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn view" title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="learner-avatar" style="background: linear-gradient(135deg, #FF8C42 0%, #FF7529 100%);">MN</div>
+                                        <div>
+                                            <div class="fw-semibold">Marie Nkurunziza</div>
+                                            <div class="small text-muted">marie.nk@minisante.gov.bi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Soins Maternels et Infantiles</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress-custom flex-grow-1" style="width: 100px;">
+                                            <div class="progress-bar-custom" style="width: 92%"></div>
+                                        </div>
+                                        <span class="small fw-semibold">92%</span>
+                                    </div>
+                                </td>
+                                <td>Il y a 5 heures</td>
+                                <td>
+                                    <span class="status-badge status-active">Actif</span>
+                                </td>
+                                <td>
+                                    <span class="badge-custom-success">19/20</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn view" title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="learner-avatar" style="background: linear-gradient(135deg, #006BB6 0%, #005494 100%);">PN</div>
+                                        <div>
+                                            <div class="fw-semibold">Pierre Ndayishimiye</div>
+                                            <div class="small text-muted">pierre.nd@minisante.gov.bi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Hygiène et Prévention</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress-custom flex-grow-1" style="width: 100px;">
+                                            <div class="progress-bar-custom" style="width: 45%"></div>
+                                        </div>
+                                        <span class="small fw-semibold">45%</span>
+                                    </div>
+                                </td>
+                                <td>Il y a 1 jour</td>
+                                <td>
+                                    <span class="status-badge status-pending">En cours</span>
+                                </td>
+                                <td>
+                                    <span class="badge-custom-warning">15/20</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn view" title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="learner-avatar" style="background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);">AK</div>
+                                        <div>
+                                            <div class="fw-semibold">Alice Kabura</div>
+                                            <div class="small text-muted">alice.k@minisante.gov.bi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Nutrition et Santé</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress-custom flex-grow-1" style="width: 100px;">
+                                            <div class="progress-bar-custom" style="width: 100%"></div>
+                                        </div>
+                                        <span class="small fw-semibold">100%</span>
+                                    </div>
+                                </td>
+                                <td>Il y a 3 jours</td>
+                                <td>
+                                    <span class="status-badge status-active">Terminé</span>
+                                </td>
+                                <td>
+                                    <span class="badge-custom-success">20/20</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn view" title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="learner-avatar" style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);">DM</div>
+                                        <div>
+                                            <div class="fw-semibold">David Mugisha</div>
+                                            <div class="small text-muted">david.m@minisante.gov.bi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Gestion des Maladies Infectieuses</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress-custom flex-grow-1" style="width: 100px;">
+                                            <div class="progress-bar-custom" style="width: 25%"></div>
+                                        </div>
+                                        <span class="small fw-semibold">25%</span>
+                                    </div>
+                                </td>
+                                <td>Il y a 5 jours</td>
+                                <td>
+                                    <span class="status-badge status-inactive">Inactif</span>
+                                </td>
+                                <td>
+                                    <span class="badge-custom-warning">12/20</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn view" title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 d-flex justify-content-between align-items-center border-top">
+                    <div class="text-muted small">
+                        Affichage de 1 à 5 sur 1,254 apprenants
+                    </div>
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Précédent</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">251</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Suivant</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Enrollment Chart
+        const enrollmentCtx = document.getElementById('enrollmentChart');
+        new Chart(enrollmentCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+                datasets: [{
+                    label: 'Inscriptions',
+                    data: [65, 89, 102, 115, 130, 148, 162, 175, 190, 205, 225, 242],
+                    borderColor: '#00A859',
+                    backgroundColor: 'rgba(0, 168, 89, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Status Chart
+        const statusCtx = document.getElementById('statusChart');
+        new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Actifs', 'En cours', 'Terminés', 'Inactifs'],
+                datasets: [{
+                    data: [450, 320, 384, 100],
+                    backgroundColor: [
+                        '#4CAF50',
+                        '#FFC107',
+                        '#00A859',
+                        '#9E9E9E'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Performance Chart
+        const performanceCtx = document.getElementById('performanceChart');
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Gestion des Maladies Infectieuses',
+                    'Soins Maternels et Infantiles',
+                    'Hygiène et Prévention',
+                    'Nutrition et Santé',
+                    'Premiers Secours'
+                ],
+                datasets: [
+                    {
+                        label: 'Inscrits',
+                        data: [320, 285, 240, 198, 165],
+                        backgroundColor: 'rgba(0, 168, 89, 0.8)',
+                        borderRadius: 8
+                    },
+                    {
+                        label: 'Terminés',
+                        data: [250, 220, 180, 165, 140],
+                        backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                        borderRadius: 8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

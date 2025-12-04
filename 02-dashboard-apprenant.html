@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Tableau de Bord - Plateforme E-Learning</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/theme-santebi.css">
+
+    <style>
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .content-area {
+            flex: 1;
+            background: var(--color-light);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .course-progress-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .course-progress-bar {
+            height: 100%;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .quick-action-btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--color-light-gray);
+            background: var(--color-white);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            color: var(--color-dark-gray);
+        }
+
+        .quick-action-btn:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 168, 89, 0.05);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: var(--color-white);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-heartbeat me-2"></i>
+                <span>E-Learning Santé BI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="02-dashboard-apprenant.html">
+                            <i class="fas fa-home me-1"></i> Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="04-page-cours.html">
+                            <i class="fas fa-book me-1"></i> Mes Cours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-certificate me-1"></i> Certificats
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <div class="user-avatar me-2" style="width: 35px; height: 35px; font-size: 0.875rem;">
+                                JD
+                            </div>
+                            Jean Dupont
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Mon Profil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Paramètres</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="01-login.html"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top: 76px;">
+        <div class="content-area">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner animate-fade-in-up">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="h2 mb-2">Bienvenue, Jean Dupont ! 👋</h1>
+                        <p class="mb-0 opacity-90">
+                            Continuez votre apprentissage. Vous avez 3 cours en cours et 2 activités à terminer cette semaine.
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <button class="btn btn-light btn-lg">
+                            <i class="fas fa-play-circle me-2"></i>
+                            Reprendre où j'en étais
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="stat-card animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="stat-icon primary">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Cours Inscrits</div>
+                        <div class="mt-3">
+                            <small class="text-success">
+                                <i class="fas fa-arrow-up me-1"></i>2 nouveaux
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="stat-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Cours Terminés</div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                60% de progression
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="stat-icon accent">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value">24h</div>
+                        <div class="stat-label">Temps d'Apprentissage</div>
+                        <div class="mt-3">
+                            <small class="text-primary">
+                                <i class="fas fa-arrow-up me-1"></i>+5h cette semaine
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="stat-icon secondary">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Certificats Obtenus</div>
+                        <div class="mt-3">
+                            <small class="text-info">
+                                <i class="fas fa-trophy me-1"></i>Excellent
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Row -->
+            <div class="row g-4 mb-4">
+                <!-- Left Column - Progress & Charts -->
+                <div class="col-lg-8">
+                    <!-- Overall Progress -->
+                    <div class="card-custom mb-4">
+                        <div class="p-4">
+                            <h4 class="mb-4">
+                                <i class="fas fa-chart-line text-primary me-2"></i>
+                                Ma Progression Globale
+                            </h4>
+                            <div class="row align-items-center">
+                                <div class="col-md-4 text-center mb-3 mb-md-0">
+                                    <div class="circular-progress mx-auto" style="--progress: 68;">
+                                        <div class="circular-progress-value">68%</div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <small class="text-muted">Progression totale</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">Gestion des Maladies Infectieuses</span>
+                                            <span class="text-primary fw-semibold">85%</span>
+                                        </div>
+                                        <div class="progress-custom">
+                                            <div class="progress-bar-custom" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">Soins Maternels et Infantiles</span>
+                                            <span class="text-primary fw-semibold">72%</span>
+                                        </div>
+                                        <div class="progress-custom">
+                                            <div class="progress-bar-custom" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">Hygiène et Prévention</span>
+                                            <span class="text-primary fw-semibold">45%</span>
+                                        </div>
+                                        <div class="progress-custom">
+                                            <div class="progress-bar-custom" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Chart -->
+                    <div class="card-custom mb-4">
+                        <div class="p-4">
+                            <h4 class="mb-4">
+                                <i class="fas fa-chart-bar text-success me-2"></i>
+                                Activité d'Apprentissage (7 derniers jours)
+                            </h4>
+                            <div class="chart-container">
+                                <canvas id="activityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Courses -->
+                    <div class="card-custom">
+                        <div class="card-header-custom">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Mes Cours en Cours
+                        </div>
+                        <div class="p-4">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card-custom h-100">
+                                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=200&fit=crop"
+                                             alt="Cours" class="course-image">
+                                        <div class="p-3">
+                                            <h5 class="mb-2">Gestion des Maladies Infectieuses</h5>
+                                            <p class="text-muted small mb-3">
+                                                <i class="fas fa-user me-1"></i> Dr. Marie Nkurunziza
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <span class="badge-custom-success">En cours</span>
+                                                <span class="text-primary fw-semibold">85%</span>
+                                            </div>
+                                            <div class="progress-custom mb-3">
+                                                <div class="progress-bar-custom" style="width: 85%"></div>
+                                            </div>
+                                            <a href="04-page-cours.html" class="btn btn-primary-custom w-100">
+                                                <i class="fas fa-play me-2"></i>Continuer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-custom h-100">
+                                        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=200&fit=crop"
+                                             alt="Cours" class="course-image">
+                                        <div class="p-3">
+                                            <h5 class="mb-2">Soins Maternels et Infantiles</h5>
+                                            <p class="text-muted small mb-3">
+                                                <i class="fas fa-user me-1"></i> Dr. Pierre Ndayishimiye
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <span class="badge-custom-warning">À terminer</span>
+                                                <span class="text-primary fw-semibold">72%</span>
+                                            </div>
+                                            <div class="progress-custom mb-3">
+                                                <div class="progress-bar-custom" style="width: 72%"></div>
+                                            </div>
+                                            <a href="04-page-cours.html" class="btn btn-primary-custom w-100">
+                                                <i class="fas fa-play me-2"></i>Continuer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Activities & Quick Actions -->
+                <div class="col-lg-4">
+                    <!-- Quick Actions -->
+                    <div class="card-custom mb-4">
+                        <div class="card-header-custom">
+                            <i class="fas fa-bolt me-2"></i>
+                            Actions Rapides
+                        </div>
+                        <div class="p-3">
+                            <a href="#" class="quick-action-btn mb-3">
+                                <div class="text-center">
+                                    <i class="fas fa-search fa-2x mb-2"></i>
+                                    <div class="fw-semibold">Explorer les Cours</div>
+                                </div>
+                            </a>
+                            <a href="#" class="quick-action-btn mb-3">
+                                <div class="text-center">
+                                    <i class="fas fa-certificate fa-2x mb-2"></i>
+                                    <div class="fw-semibold">Mes Certificats</div>
+                                </div>
+                            </a>
+                            <a href="#" class="quick-action-btn">
+                                <div class="text-center">
+                                    <i class="fas fa-calendar-check fa-2x mb-2"></i>
+                                    <div class="fw-semibold">Mon Calendrier</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card-custom mb-4">
+                        <div class="card-header-custom">
+                            <i class="fas fa-history me-2"></i>
+                            Activités Récentes
+                        </div>
+                        <div class="p-3">
+                            <div class="activity-item">
+                                <div class="activity-icon" style="background: rgba(0, 168, 89, 0.1); color: var(--color-primary);">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold small">Quiz complété</div>
+                                    <div class="text-muted small">Module 3 - Score: 18/20</div>
+                                    <div class="text-muted small">Il y a 2 heures</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon" style="background: rgba(255, 140, 66, 0.1); color: var(--color-accent);">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold small">Vidéo visionnée</div>
+                                    <div class="text-muted small">Les vaccins essentiels</div>
+                                    <div class="text-muted small">Hier à 14:30</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon" style="background: rgba(0, 107, 182, 0.1); color: var(--color-secondary);">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold small">Devoir soumis</div>
+                                    <div class="text-muted small">Étude de cas clinique</div>
+                                    <div class="text-muted small">Il y a 2 jours</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon" style="background: rgba(76, 175, 80, 0.1); color: var(--color-success);">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold small">Badge obtenu</div>
+                                    <div class="text-muted small">Expert en Prévention</div>
+                                    <div class="text-muted small">Il y a 3 jours</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Deadlines -->
+                    <div class="card-custom">
+                        <div class="card-header-custom">
+                            <i class="fas fa-clock me-2"></i>
+                            Échéances à Venir
+                        </div>
+                        <div class="p-3">
+                            <div class="mb-3 p-3" style="background: rgba(244, 67, 54, 0.05); border-left: 3px solid var(--color-danger); border-radius: var(--radius-md);">
+                                <div class="fw-semibold text-danger">
+                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    Urgent
+                                </div>
+                                <div class="small mt-2">Quiz Final - Hygiène</div>
+                                <div class="text-muted small">Dans 2 jours</div>
+                            </div>
+                            <div class="mb-3 p-3" style="background: rgba(255, 193, 7, 0.05); border-left: 3px solid var(--color-warning); border-radius: var(--radius-md);">
+                                <div class="fw-semibold text-warning">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Bientôt
+                                </div>
+                                <div class="small mt-2">Devoir Pratique</div>
+                                <div class="text-muted small">Dans 5 jours</div>
+                            </div>
+                            <div class="p-3" style="background: rgba(33, 150, 243, 0.05); border-left: 3px solid var(--color-info); border-radius: var(--radius-md);">
+                                <div class="fw-semibold text-info">
+                                    <i class="fas fa-calendar me-2"></i>
+                                    Planifié
+                                </div>
+                                <div class="small mt-2">Examen Final</div>
+                                <div class="text-muted small">Dans 2 semaines</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Activity Chart
+        const ctx = document.getElementById('activityChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                datasets: [{
+                    label: 'Heures d\'apprentissage',
+                    data: [2.5, 3, 1.5, 4, 2, 3.5, 2],
+                    backgroundColor: 'rgba(0, 168, 89, 0.8)',
+                    borderColor: 'rgba(0, 168, 89, 1)',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'h';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

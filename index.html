@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockups - Thème Santé BI</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/theme-santebi.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #00A859 0%, #006BB6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .mockup-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 3px solid transparent;
+        }
+
+        .mockup-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-accent);
+        }
+
+        .mockup-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .container-custom {
+            max-width: 1400px;
+        }
+
+        .header-logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .header-logo i {
+            font-size: 3rem;
+            color: var(--color-primary);
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            border: 2px solid white;
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-custom container">
+        <!-- Header -->
+        <div class="text-center text-white mb-5">
+            <div class="header-logo">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h1 class="display-4 fw-bold mb-3">Mockups - Thème Santé BI</h1>
+            <p class="lead mb-4">
+                Plateforme E-Learning - Ministère de la Santé du Burundi
+            </p>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <div>
+                    <i class="fas fa-palette me-2"></i>
+                    Design Moderne
+                </div>
+                <div>
+                    <i class="fas fa-mobile-alt me-2"></i>
+                    Responsive
+                </div>
+                <div>
+                    <i class="fas fa-universal-access me-2"></i>
+                    Accessible
+                </div>
+            </div>
+            <div class="color-palette justify-content-center">
+                <div class="color-swatch" style="background: #00A859;" title="Primaire"></div>
+                <div class="color-swatch" style="background: #006BB6;" title="Secondaire"></div>
+                <div class="color-swatch" style="background: #FF8C42;" title="Accent"></div>
+                <div class="color-swatch" style="background: #4CAF50;" title="Succès"></div>
+            </div>
+        </div>
+
+        <!-- Mockup Cards -->
+        <div class="row g-4 mb-5">
+            <!-- Login Page -->
+            <div class="col-md-6 col-lg-3">
+                <a href="01-login.html" class="mockup-card animate-fade-in-up">
+                    <div class="mockup-icon" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white;">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h4 class="mb-2">Page de Connexion</h4>
+                    <p class="text-muted mb-3">
+                        Interface moderne avec statistiques de la plateforme et sélection de langue
+                    </p>
+                    <div class="d-flex align-items-center text-primary">
+                        <span class="me-2">Voir le mockup</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Student Dashboard -->
+            <div class="col-md-6 col-lg-3">
+                <a href="02-dashboard-apprenant.html" class="mockup-card animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="mockup-icon" style="background: linear-gradient(135deg, var(--color-success) 0%, #2E7D32 100%); color: white;">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h4 class="mb-2">Dashboard Apprenant</h4>
+                    <p class="text-muted mb-3">
+                        Statistiques personnalisées, progression des cours, activités récentes et échéances
+                    </p>
+                    <div class="d-flex align-items-center text-primary">
+                        <span class="me-2">Voir le mockup</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div class="col-md-6 col-lg-3">
+                <a href="03-dashboard-admin.html" class="mockup-card animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="mockup-icon" style="background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%); color: white;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="mb-2">Dashboard Admin</h4>
+                    <p class="text-muted mb-3">
+                        Statistiques globales, graphiques interactifs, suivi des apprenants et rapports
+                    </p>
+                    <div class="d-flex align-items-center text-primary">
+                        <span class="me-2">Voir le mockup</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Course Page -->
+            <div class="col-md-6 col-lg-3">
+                <a href="04-page-cours.html" class="mockup-card animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="mockup-icon" style="background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%); color: white;">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4 class="mb-2">Page de Cours</h4>
+                    <p class="text-muted mb-3">
+                        Navigation par modules, lecteur vidéo, ressources téléchargeables et prise de notes
+                    </p>
+                    <div class="d-flex align-items-center text-primary">
+                        <span class="me-2">Voir le mockup</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card-custom">
+                    <div class="card-header-custom text-center">
+                        <i class="fas fa-star me-2"></i>
+                        Fonctionnalités Principales
+                    </div>
+                    <div class="p-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon primary mx-auto mb-3">
+                                        <i class="fas fa-paint-brush"></i>
+                                    </div>
+                                    <h5>Design Moderne</h5>
+                                    <p class="text-muted small">
+                                        Interface clean et intuitive avec des couleurs adaptées au domaine de la santé
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon success mx-auto mb-3">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <h5>Statistiques Détaillées</h5>
+                                    <p class="text-muted small">
+                                        Tableaux de bord avec graphiques interactifs pour apprenants et administrateurs
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon secondary mx-auto mb-3">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <h5>Totalement Responsive</h5>
+                                    <p class="text-muted small">
+                                        Adapté à tous les écrans: ordinateurs, tablettes et smartphones
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon accent mx-auto mb-3">
+                                        <i class="fas fa-route"></i>
+                                    </div>
+                                    <h5>Parcours d'Apprentissage</h5>
+                                    <p class="text-muted small">
+                                        Navigation claire entre modules avec suivi de progression
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon primary mx-auto mb-3">
+                                        <i class="fas fa-file-download"></i>
+                                    </div>
+                                    <h5>Export de Rapports</h5>
+                                    <p class="text-muted small">
+                                        Export Excel/PDF des statistiques pour les bailleurs de fonds
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <div class="stat-icon success mx-auto mb-3">
+                                        <i class="fas fa-language"></i>
+                                    </div>
+                                    <h5>Multilingue</h5>
+                                    <p class="text-muted small">
+                                        Support du Français, Kirundi et Anglais
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-white mt-5">
+            <p class="mb-2">
+                <i class="fas fa-code me-2"></i>
+                Développé avec Bootstrap 5, Chart.js et Font Awesome
+            </p>
+            <p class="small opacity-75">
+                Mockups créés pour le Ministère de la Santé du Burundi - 2024
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
