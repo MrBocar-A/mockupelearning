@@ -1,237 +1,354 @@
-# Mockups - Thème Santé BI
-## Plateforme E-Learning - Ministère de la Santé du Burundi
+# 🚀 Déploiement des Mockups - Thème Santé BI
+
+Ce dossier contient tous les fichiers nécessaires pour déployer les mockups sur **Vercel** via **GitHub**.
 
 ---
 
-## 📋 Présentation
-
-Ce dossier contient les **mockups interactifs** du nouveau thème pour la plateforme e-learning du Ministère de la Santé du Burundi. Ces mockups sont des prototypes HTML/CSS fonctionnels qui démontrent le design, les couleurs, la typographie et les fonctionnalités proposées.
-
----
-
-## 🎨 Palette de Couleurs
-
-| Couleur | Code Hex | Usage |
-|---------|----------|-------|
-| **Vert Primaire** | `#00A859` | Couleur principale, boutons, liens |
-| **Bleu Secondaire** | `#006BB6` | Sections secondaires, badges |
-| **Orange Accent** | `#FF8C42` | Appels à l'action, progression |
-| **Vert Succès** | `#4CAF50` | Indicateurs de succès, validation |
-| **Gris Clair** | `#F5F7FA` | Arrière-plan |
-| **Blanc** | `#FFFFFF` | Cartes, contenus |
-
----
-
-## 📁 Structure des Fichiers
+## 📋 Contenu du Dossier
 
 ```
-mockups/
-├── index.html                      # Page d'accueil des mockups (À OUVRIR EN PREMIER)
-├── 01-login.html                   # Page de connexion
-├── 02-dashboard-apprenant.html     # Tableau de bord apprenant
-├── 03-dashboard-admin.html         # Tableau de bord administrateur
-├── 04-page-cours.html              # Page de cours avec modules
+vercel/
+├── index.html                  # Page d'accueil des mockups
+├── 01-login.html              # Page de connexion
+├── 02-dashboard-apprenant.html # Dashboard apprenant
+├── 03-dashboard-admin.html     # Dashboard administrateur
+├── 04-page-cours.html          # Page de cours
 ├── assets/
 │   └── css/
-│       └── theme-santebi.css       # Styles personnalisés
-└── README.md                       # Ce fichier
+│       └── theme-santebi.css   # Styles personnalisés
+├── vercel.json                 # Configuration Vercel
+├── package.json                # Configuration npm
+├── .gitignore                  # Fichiers à ignorer
+└── README.md                   # Ce fichier
 ```
 
 ---
 
-## 🚀 Comment Utiliser les Mockups
+## 🎯 Prérequis
 
-### Étape 1 : Ouvrir les Mockups
+Avant de commencer, assurez-vous d'avoir :
 
-1. Ouvrez le fichier **`index.html`** dans votre navigateur web
-2. Vous verrez une page d'accueil avec les 4 mockups disponibles
-3. Cliquez sur n'importe quelle carte pour explorer le mockup
-
-### Étape 2 : Navigation
-
-- **Page de Connexion** → Cliquez sur "Se connecter" pour aller au dashboard apprenant
-- **Dashboard Apprenant** → Cliquez sur les cours pour voir la page de cours
-- **Dashboard Admin** → Accessible via la page d'accueil
-- **Page de Cours** → Accessible depuis le dashboard apprenant
-
-### Étape 3 : Test sur Mobile
-
-1. Ouvrez les mockups dans votre navigateur
-2. Utilisez les outils de développement (F12)
-3. Activez le mode responsive pour tester sur différentes tailles d'écran
+1. ✅ Un compte GitHub ([créer un compte](https://github.com/signup))
+2. ✅ Un compte Vercel ([créer un compte](https://vercel.com/signup))
+3. ✅ Git installé sur votre ordinateur ([télécharger Git](https://git-scm.com/downloads))
 
 ---
 
-## ✨ Fonctionnalités Démontrées
+## 📤 Étape 1 : Pousser sur GitHub
 
-### 1. Page de Connexion (01-login.html)
-- ✅ Design split-screen moderne
-- ✅ Statistiques de la plateforme
-- ✅ Sélection de langue (Français, Kirundi, English)
-- ✅ Animation fluide
-- ✅ Responsive mobile
+### Option A : Via GitHub Desktop (Recommandé pour débutants)
 
-### 2. Dashboard Apprenant (02-dashboard-apprenant.html)
-- ✅ Widget de statistiques personnalisées
-- ✅ Progression globale avec cercle animé
-- ✅ Graphique d'activité hebdomadaire (Chart.js)
-- ✅ Liste des cours avec progression
-- ✅ Activités récentes
-- ✅ Échéances à venir avec priorités
-- ✅ Actions rapides
+1. **Télécharger GitHub Desktop**
+   - Téléchargez depuis : https://desktop.github.com/
+   - Installez et connectez-vous avec votre compte GitHub
 
-### 3. Dashboard Administrateur (03-dashboard-admin.html)
-- ✅ Statistiques globales avec KPIs
-- ✅ Filtres avancés (Formation, Module, Période, Région)
-- ✅ Export Excel/PDF
-- ✅ Graphiques interactifs :
-  - Évolution des inscriptions
-  - Répartition par statut
-  - Performance par formation
-- ✅ Table de suivi détaillée des apprenants
-- ✅ Recherche et pagination
+2. **Créer un nouveau repository**
+   - Cliquez sur `File` → `New Repository`
+   - Nom : `theme-santebi-mockups`
+   - Description : `Mockups du thème e-learning - Ministère de la Santé du Burundi`
+   - Local Path : Sélectionnez le dossier parent de `vercel/`
+   - Cochez "Initialize this repository with a README"
+   - Cliquez sur `Create Repository`
 
-### 4. Page de Cours (04-page-cours.html)
-- ✅ Navigation par modules avec sidebar
-- ✅ Lecteur vidéo avec placeholder
-- ✅ Onglets : Ressources, Notes, Transcription
-- ✅ Téléchargement de fichiers (PDF, Excel, PowerPoint)
-- ✅ Prise de notes intégrée
-- ✅ Navigation entre activités
-- ✅ Indicateurs de progression
+3. **Ajouter les fichiers**
+   - Copiez tout le contenu du dossier `vercel/` dans le repository créé
+   - GitHub Desktop détectera automatiquement les changements
 
----
+4. **Commit et Push**
+   - Dans GitHub Desktop, vous verrez tous les fichiers
+   - En bas à gauche, entrez un message de commit : `Initial commit - Mockups Santé BI`
+   - Cliquez sur `Commit to main`
+   - Cliquez sur `Publish repository` (ou `Push origin` si déjà publié)
+   - Choisissez "Public" si vous voulez que ce soit visible par tous, sinon "Private"
 
-## 🎯 Fonctionnalités Techniques
+### Option B : Via Ligne de Commande (Pour utilisateurs avancés)
 
-### Technologies Utilisées
-- **Bootstrap 5.3** - Framework CSS responsive
-- **Font Awesome 6.4** - Icônes
-- **Chart.js 4.4** - Graphiques interactifs
-- **Google Fonts** - Typographie (Poppins, Inter)
-- **CSS Variables** - Personnalisation des couleurs
-- **Flexbox & Grid** - Layout moderne
+1. **Ouvrir le terminal dans le dossier vercel**
+   ```bash
+   cd C:\Users\BOCAR\Documents\Dalberg_Burundi\E-Health\E-learning\Elearning_DesignUI\vercel
+   ```
 
-### Responsive Design
-- **Mobile First** - Design optimisé pour mobile
-- **Breakpoints** :
-  - Mobile : < 768px
-  - Tablet : 768px - 992px
-  - Desktop : > 992px
+2. **Initialiser Git**
+   ```bash
+   git init
+   ```
 
-### Accessibilité
-- Contraste WCAG AA
-- Navigation au clavier
-- Labels ARIA
-- Textes alternatifs
+3. **Ajouter tous les fichiers**
+   ```bash
+   git add .
+   ```
 
----
+4. **Faire le premier commit**
+   ```bash
+   git commit -m "Initial commit - Mockups Santé BI"
+   ```
 
-## 📊 Comparaison Avant/Après
+5. **Créer le repository sur GitHub**
+   - Allez sur https://github.com/new
+   - Nom : `theme-santebi-mockups`
+   - Description : `Mockups du thème e-learning - Ministère de la Santé du Burundi`
+   - Choisissez Public ou Private
+   - NE COCHEZ PAS "Initialize this repository with a README"
+   - Cliquez sur `Create repository`
 
-| Aspect | Thème Actuel | Thème Santé BI |
-|--------|--------------|----------------|
-| **Design** | Standard Moodle | Moderne et personnalisé |
-| **Couleurs** | Bleu générique | Palette santé (vert/bleu) |
-| **Dashboard Apprenant** | Basique | Statistiques visuelles avancées |
-| **Dashboard Admin** | Standard | Graphiques interactifs + Export |
-| **Navigation Cours** | Liste simple | Sidebar avec progression |
-| **Statistiques** | Limitées | Graphiques détaillés |
-| **Responsive** | Correct | Optimisé mobile-first |
+6. **Lier le repository local au repository GitHub**
+   ```bash
+   git remote add origin https://github.com/VOTRE-USERNAME/theme-santebi-mockups.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+   Remplacez `VOTRE-USERNAME` par votre nom d'utilisateur GitHub.
 
 ---
 
-## 🔄 Prochaines Étapes
+## 🌐 Étape 2 : Déployer sur Vercel
 
-### Phase 1 : Validation
-1. ✅ Présenter les mockups au client
-2. ⏳ Recueillir les retours et ajustements
-3. ⏳ Valider la charte graphique
-4. ⏳ Confirmer les fonctionnalités prioritaires
+### Méthode 1 : Via l'Interface Web (Recommandée)
 
-### Phase 2 : Développement du Thème Moodle
-1. Créer la structure du thème basé sur Boost/Moove
-2. Intégrer les templates Mustache
-3. Configurer les fichiers SCSS avec les couleurs
-4. Développer les renderers PHP personnalisés
-5. Créer les classes pour les statistiques
+1. **Aller sur Vercel**
+   - Visitez : https://vercel.com/
+   - Connectez-vous (ou créez un compte)
 
-### Phase 3 : Intégration et Tests
-1. Installation sur environnement de test
-2. Tests de compatibilité Moodle
-3. Tests responsive sur différents appareils
-4. Tests de performance
-5. Corrections et optimisations
+2. **Importer le Projet**
+   - Cliquez sur `Add New...` → `Project`
+   - Cliquez sur `Continue with GitHub`
+   - Autorisez Vercel à accéder à votre GitHub
+   - Cherchez et sélectionnez le repository `theme-santebi-mockups`
+   - Cliquez sur `Import`
 
-### Phase 4 : Déploiement
-1. Formation des administrateurs
-2. Migration des données existantes
-3. Déploiement en production
-4. Suivi et support
+3. **Configuration (déjà faite via vercel.json)**
+   - **Framework Preset** : Other
+   - **Root Directory** : `./` (laisser par défaut)
+   - **Build Command** : (laisser vide)
+   - **Output Directory** : (laisser vide)
+   - Cliquez sur `Deploy`
 
----
+4. **Attendre le déploiement**
+   - Le déploiement prend généralement 30-60 secondes
+   - Une fois terminé, vous verrez "Congratulations!" 🎉
 
-## 💡 Recommandations
+5. **Accéder au site**
+   - Vercel vous donnera une URL comme : `https://theme-santebi-mockups.vercel.app`
+   - Cliquez sur `Visit` pour voir vos mockups en ligne !
 
-### Pour les Apprenants
-- Interface simple et intuitive
-- Statistiques motivantes
-- Parcours d'apprentissage clair
-- Accès mobile optimisé
+### Méthode 2 : Via CLI Vercel
 
-### Pour les Administrateurs
-- Tableaux de bord complets
-- Export de rapports facilité
-- Suivi en temps réel
-- Filtres puissants
+1. **Installer Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
 
-### Pour les Bailleurs
-- Rapports standardisés
-- Métriques claires
-- Export Excel/PDF
-- Suivi de l'impact
+2. **Se connecter à Vercel**
+   ```bash
+   vercel login
+   ```
 
----
+3. **Déployer**
+   ```bash
+   cd C:\Users\BOCAR\Documents\Dalberg_Burundi\E-Health\E-learning\Elearning_DesignUI\vercel
+   vercel --prod
+   ```
 
-## 🤔 Questions Fréquentes
-
-**Q: Ces mockups fonctionnent-ils comme le vrai Moodle ?**
-R: Non, ce sont des prototypes HTML statiques pour démontrer le design. Le thème Moodle final sera entièrement fonctionnel.
-
-**Q: Peut-on modifier les couleurs ?**
-R: Oui, toutes les couleurs sont définies dans le fichier `assets/css/theme-santebi.css` via des variables CSS.
-
-**Q: Les graphiques sont-ils interactifs ?**
-R: Oui, dans les mockups ils sont générés par Chart.js. Dans Moodle, ils seront générés dynamiquement avec les vraies données.
-
-**Q: Combien de temps pour développer le vrai thème ?**
-R: Environ 2-3 semaines pour un MVP, 4-6 semaines pour la version complète avec toutes les fonctionnalités.
+4. **Suivre les instructions**
+   - Set up and deploy? `Y`
+   - Which scope? (Choisissez votre compte)
+   - Link to existing project? `N`
+   - Project name? `theme-santebi-mockups`
+   - In which directory? `./` (appuyez sur Entrée)
+   - Want to override settings? `N`
 
 ---
 
-## 📞 Contact
+## 🎉 Étape 3 : Partager le Lien
 
-Pour toute question ou modification sur ces mockups :
-- **Client** : Ministère de la Santé du Burundi
-- **Projet** : Plateforme E-Learning
-- **Date** : Décembre 2024
+Une fois déployé, vous obtiendrez une URL comme :
+```
+https://theme-santebi-mockups.vercel.app
+```
+
+Vous pouvez partager cette URL avec :
+- ✅ Les membres du Ministère de la Santé
+- ✅ Les bailleurs de fonds
+- ✅ L'équipe de développement
+- ✅ Les utilisateurs testeurs
+
+---
+
+## 🔄 Mettre à Jour les Mockups
+
+### Si vous modifiez les mockups localement :
+
+1. **Mettre à jour GitHub**
+
+   **Via GitHub Desktop :**
+   - Les modifications apparaîtront automatiquement
+   - Entrez un message de commit (ex: "Mise à jour des couleurs")
+   - Cliquez sur `Commit to main`
+   - Cliquez sur `Push origin`
+
+   **Via ligne de commande :**
+   ```bash
+   git add .
+   git commit -m "Description de vos modifications"
+   git push
+   ```
+
+2. **Vercel se mettra à jour automatiquement !**
+   - Vercel détecte automatiquement les changements sur GitHub
+   - Le site se redéploie automatiquement (1-2 minutes)
+   - Vous recevrez un email de confirmation
+
+---
+
+## 🎨 Personnaliser le Domaine (Optionnel)
+
+Pour avoir un domaine personnalisé (ex: `mockups.minisante.gov.bi`) :
+
+1. **Dans le Dashboard Vercel**
+   - Allez dans votre projet
+   - Cliquez sur `Settings` → `Domains`
+
+2. **Ajouter un domaine**
+   - Cliquez sur `Add`
+   - Entrez votre domaine : `mockups.minisante.gov.bi`
+   - Suivez les instructions pour configurer les DNS
+
+3. **Configuration DNS**
+   - Chez votre registrar de domaine, ajoutez un enregistrement :
+   - Type : `CNAME`
+   - Nom : `mockups`
+   - Valeur : `cname.vercel-dns.com`
+
+---
+
+## 🔒 Protéger par Mot de Passe (Optionnel)
+
+Si vous voulez que seules certaines personnes accèdent aux mockups :
+
+### Option 1 : Repository GitHub Privé
+- Dans les paramètres GitHub du repository
+- Settings → Change visibility → Make private
+
+### Option 2 : Vercel Password Protection (Pro uniquement)
+- Nécessite un compte Vercel Pro
+- Settings → Password Protection
+- Activez et définissez un mot de passe
+
+### Option 3 : Basic Auth (Gratuit)
+Créez un fichier `vercel.json` avec :
+```json
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1",
+      "headers": {
+        "WWW-Authenticate": "Basic realm=\"Mockups Santé BI\""
+      }
+    }
+  ]
+}
+```
+
+---
+
+## 📊 Statistiques d'Accès
+
+Pour voir combien de personnes visitent vos mockups :
+
+1. **Dashboard Vercel**
+   - Allez sur https://vercel.com/dashboard
+   - Cliquez sur votre projet
+   - Onglet `Analytics`
+
+2. **Vous verrez :**
+   - Nombre de visiteurs
+   - Pages les plus visitées
+   - Pays des visiteurs
+   - Temps de chargement
+
+---
+
+## ❓ Problèmes Courants et Solutions
+
+### Problème 1 : "Repository not found"
+**Solution :** Vérifiez que vous avez bien autorisé Vercel à accéder à votre repository GitHub dans les paramètres GitHub.
+
+### Problème 2 : "Build failed"
+**Solution :** Les mockups sont des fichiers HTML statiques, ils ne nécessitent pas de build. Vérifiez que vous avez bien le fichier `vercel.json`.
+
+### Problème 3 : "Page not found (404)"
+**Solution :** Assurez-vous que le fichier `index.html` est bien à la racine du dossier.
+
+### Problème 4 : "CSS ne se charge pas"
+**Solution :** Vérifiez que le dossier `assets/css/` contient bien le fichier `theme-santebi.css`.
+
+### Problème 5 : "Cannot push to GitHub"
+**Solution :**
+```bash
+git config user.name "Votre Nom"
+git config user.email "votre.email@example.com"
+```
+
+---
+
+## 📞 Support
+
+**Besoin d'aide ?**
+- 📧 Email : [Votre email]
+- 💬 GitHub Issues : [Lien vers issues]
+- 📚 Documentation Vercel : https://vercel.com/docs
+- 📚 Documentation GitHub : https://docs.github.com
+
+---
+
+## ✅ Checklist de Déploiement
+
+- [ ] Compte GitHub créé
+- [ ] Compte Vercel créé
+- [ ] Git installé localement
+- [ ] Repository créé sur GitHub
+- [ ] Fichiers poussés sur GitHub
+- [ ] Projet importé sur Vercel
+- [ ] Déploiement réussi
+- [ ] URL partagée avec l'équipe
+- [ ] Testé sur mobile/tablette
+- [ ] Testé sur différents navigateurs
+
+---
+
+## 🎯 Prochaines Étapes
+
+Une fois les mockups déployés :
+
+1. ✅ Partager le lien avec les parties prenantes
+2. ✅ Recueillir les retours
+3. ✅ Faire les ajustements nécessaires
+4. ✅ Valider le design final
+5. ✅ Démarrer le développement du thème Moodle
 
 ---
 
 ## 📝 Notes Importantes
 
-⚠️ **Ces mockups sont des prototypes visuels**
-- Ils ne contiennent pas de vraies données
-- Ils ne sont pas connectés à une base de données
-- Les formulaires ne soumettent pas de données
-- Les liens mènent vers d'autres mockups
+⚠️ **GitHub Public vs Private**
+- **Public** : Tout le monde peut voir le code source
+- **Private** : Seules les personnes autorisées peuvent voir le code
+- Les mockups seront visibles sur Vercel dans les deux cas si vous partagez le lien
 
-✅ **Objectif des mockups**
-- Valider le design visuel
-- Tester l'ergonomie
-- Confirmer les fonctionnalités
-- Obtenir l'approbation avant développement
+✅ **Gratuit et Illimité**
+- Vercel offre un déploiement gratuit illimité pour les sites statiques
+- GitHub offre des repositories publics gratuits illimités
+- Aucun coût caché !
+
+🔄 **Mises à jour automatiques**
+- Chaque fois que vous poussez du code sur GitHub
+- Vercel redéploie automatiquement
+- Pas besoin de configuration supplémentaire
 
 ---
 
-**Bonne exploration des mockups ! 🎉**
+**Bon déploiement ! 🚀**
+
+*Si vous avez des questions, n'hésitez pas à demander de l'aide !*

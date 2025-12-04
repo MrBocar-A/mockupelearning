@@ -1,0 +1,20 @@
+{
+  "name": "theme-santebi-mockups",
+  "version": "1.0.0",
+  "description": "Mockups du thème e-learning pour le Ministère de la Santé du Burundi",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "moodle",
+    "theme",
+    "e-learning",
+    "burundi",
+    "health",
+    "mockups"
+  ],
+  "author": "Ministère de la Santé du Burundi",
+  "license": "MIT"
+}

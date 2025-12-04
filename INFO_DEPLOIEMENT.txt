@@ -1,0 +1,212 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║     DOSSIER PRÊT POUR LE DÉPLOIEMENT SUR VERCEL !             ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+📁 Emplacement :
+C:\Users\BOCAR\Documents\Dalberg_Burundi\E-Health\E-learning\Elearning_DesignUI\vercel
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CONTENU DU DOSSIER
+
+Pages HTML (Mockups) :
+  ✓ index.html                      - Page d'accueil
+  ✓ 01-login.html                   - Connexion
+  ✓ 02-dashboard-apprenant.html     - Dashboard apprenant
+  ✓ 03-dashboard-admin.html         - Dashboard admin
+  ✓ 04-page-cours.html              - Page de cours
+
+Styles :
+  ✓ assets/css/theme-santebi.css    - CSS personnalisé
+
+Configuration :
+  ✓ vercel.json                     - Config Vercel
+  ✓ package.json                    - Config npm
+  ✓ .gitignore                      - Fichiers à ignorer
+
+Documentation :
+  ✓ README.md                       - Guide complet (détaillé)
+  ✓ DEPLOIEMENT_RAPIDE.md          - Guide express (5 min)
+  ✓ COMMANDES_GIT.md               - Toutes les commandes Git
+  ✓ init-git.bat                   - Script automatique Git
+  ✓ INFO_DEPLOIEMENT.txt           - Ce fichier
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 DÉPLOIEMENT EN 3 ÉTAPES SIMPLES
+
+┌────────────────────────────────────────────────────────────┐
+│ ÉTAPE 1 : GITHUB (2 minutes)                              │
+└────────────────────────────────────────────────────────────┘
+
+Option A - Via le Web (PLUS FACILE) :
+  1. Allez sur : https://github.com/new
+  2. Nom : theme-santebi-mockups
+  3. Cochez "Public"
+  4. Cliquez "Create repository"
+  5. Cliquez "uploading an existing file"
+  6. Glissez-déposez TOUS les fichiers de ce dossier
+  7. Cliquez "Commit changes"
+
+Option B - Via Git :
+  1. Double-cliquez sur : init-git.bat
+  2. Suivez les instructions à l'écran
+  3. Le script fera tout automatiquement !
+
+┌────────────────────────────────────────────────────────────┐
+│ ÉTAPE 2 : VERCEL (2 minutes)                              │
+└────────────────────────────────────────────────────────────┘
+
+  1. Allez sur : https://vercel.com
+  2. Cliquez "Continue with GitHub"
+  3. Cliquez "Add New..." → "Project"
+  4. Sélectionnez "theme-santebi-mockups"
+  5. Cliquez "Import"
+  6. Cliquez "Deploy"
+  7. Attendez 1 minute ⏳
+  8. 🎉 TERMINÉ !
+
+┌────────────────────────────────────────────────────────────┐
+│ ÉTAPE 3 : PARTAGER (30 secondes)                          │
+└────────────────────────────────────────────────────────────┘
+
+  Votre URL sera du type :
+  https://theme-santebi-mockups.vercel.app
+
+  Partagez-la avec :
+  ✓ Équipe du Ministère
+  ✓ Bailleurs de fonds
+  ✓ Utilisateurs testeurs
+  ✓ Développeurs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 GUIDES DISPONIBLES
+
+Pour débutants :
+  → DEPLOIEMENT_RAPIDE.md   (Guide ultra-simple, 5 minutes)
+
+Pour utilisateurs Git :
+  → COMMANDES_GIT.md        (Toutes les commandes expliquées)
+
+Pour guide complet :
+  → README.md               (Documentation détaillée)
+
+Script automatique :
+  → init-git.bat            (Double-cliquez pour lancer)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔄 POUR METTRE À JOUR PLUS TARD
+
+Méthode 1 - Via GitHub Web (FACILE) :
+  1. Allez sur votre repository GitHub
+  2. Cliquez sur le fichier à modifier
+  3. Cliquez sur l'icône crayon
+  4. Modifiez
+  5. Cliquez "Commit changes"
+  → Vercel se met à jour automatiquement !
+
+Méthode 2 - Via Git :
+  git add .
+  git commit -m "Description des modifications"
+  git push
+  → Vercel se met à jour automatiquement !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 CONSEILS IMPORTANTS
+
+✓ Gratuit et Illimité
+  - GitHub : repositories publics gratuits
+  - Vercel : hébergement gratuit pour sites statiques
+  - Pas de carte bancaire nécessaire !
+
+✓ Mises à Jour Automatiques
+  - Chaque modification sur GitHub
+  - Se déploie automatiquement sur Vercel
+  - En moins de 2 minutes
+
+✓ Accessible Partout
+  - Sur ordinateur
+  - Sur tablette
+  - Sur smartphone
+  - Tous les navigateurs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ QUESTIONS FRÉQUENTES
+
+Q: Dois-je installer quelque chose ?
+R: Non ! Tout se fait via le navigateur web.
+
+Q: C'est vraiment gratuit ?
+R: Oui ! 100% gratuit pour votre usage.
+
+Q: Les autres peuvent-ils modifier mes fichiers ?
+R: Non, seulement vous (sauf si vous les ajoutez comme collaborateurs).
+
+Q: Comment protéger par mot de passe ?
+R: Mettez le repository GitHub en "Private" au lieu de "Public".
+
+Q: Puis-je avoir mon propre domaine ?
+R: Oui ! Voir le README.md pour les instructions.
+
+Q: Combien de temps les mockups restent en ligne ?
+R: Indéfiniment ! Tant que vous gardez le repository.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 BESOIN D'AIDE ?
+
+Option 1 - Lisez les guides :
+  • DEPLOIEMENT_RAPIDE.md pour un guide simple
+  • README.md pour un guide complet
+  • COMMANDES_GIT.md pour les commandes Git
+
+Option 2 - Documentation officielle :
+  • GitHub : https://docs.github.com/fr
+  • Vercel : https://vercel.com/docs
+
+Option 3 - Support vidéo :
+  • YouTube : "Comment déployer sur Vercel"
+  • YouTube : "GitHub pour débutants"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CHECKLIST AVANT DE COMMENCER
+
+Avant GitHub :
+  [ ] J'ai un compte GitHub
+  [ ] Je suis connecté à GitHub
+  [ ] J'ai tous les fichiers du dossier "vercel"
+
+Avant Vercel :
+  [ ] J'ai un compte Vercel
+  [ ] J'ai lié Vercel à mon GitHub
+  [ ] Mon repository est sur GitHub
+
+Prêt à Déployer :
+  [ ] Repository créé sur GitHub
+  [ ] Fichiers uploadés sur GitHub
+  [ ] Projet importé sur Vercel
+  [ ] Déploiement lancé
+  [ ] URL obtenue
+  [ ] Mockups testés en ligne
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 VOUS ÊTES PRÊT !
+
+Tout est configuré pour le déploiement.
+Suivez simplement le guide DEPLOIEMENT_RAPIDE.md
+et vos mockups seront en ligne en 5 minutes !
+
+Bonne chance ! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Date de création : Décembre 2024
+Projet : Thème E-Learning - Ministère de la Santé du Burundi
